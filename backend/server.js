@@ -35,8 +35,11 @@ app.get("/", (req, res) => {
   res.send("API is working!");
 });
 
-app.listen(port, () => {
-  console.log(`Server started on https://localhost:${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`Server started on https://localhost:${port}`);
+// });
+export default function handler(req, res) {
+  res.status(200).json({ message: "Hello from Vercel!" });
+}
 
 // mongodb+srv://tempraj000:0sn74swkS5JO2yAF@cluster0.oj0hr7q.mongodb.net/?
