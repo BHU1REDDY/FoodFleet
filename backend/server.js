@@ -14,7 +14,12 @@ const port = process.env.PORT || 4000;
 
 //middleware
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://food-fleet-frontend.vercel.app/", // allow frontend
+    credentials: true, // if using cookies/auth
+  })
+);
 
 //db connection
 connectDB();
