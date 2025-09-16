@@ -16,6 +16,20 @@ const port = process.env.PORT || 4000;
 app.use(express.json());
 app.use(cors());
 
+let isConnected = false;
+
+async function connectDB() {
+  if (isConnected) return;
+  await mongoose
+    .connect(
+      "mongodb+srv://tempraj000:0sn74swkS5JO2yAF@cluster0.oj0hr7q.mongodb.net/FoodFleet"
+    )
+    .then(() => {
+      isConnected = true;
+      console.log("Db connected");
+    });
+}
+
 //db connection
 connectDB();
 
@@ -29,6 +43,8 @@ app.use("/api/order", orderRouter);
 app.get("/", (req, res) => {
   res.send("API is working!");
 });
+
+module.exports = app;
 
 // app.listen(port, () => {
 //   console.log(`Server started on https://localhost:${port}`);
