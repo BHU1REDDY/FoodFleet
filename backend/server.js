@@ -1,4 +1,5 @@
 import express from "express";
+import mongoose from "mongoose";
 import cors from "cors";
 import { connectDB } from "./config/db.js";
 import foodRouter from "./routes/foodRoute.js";
@@ -44,7 +45,7 @@ app.get("/", (req, res) => {
   res.send("API is working!");
 });
 
-module.exports = app;
+export default app;
 
 // app.listen(port, () => {
 //   console.log(`Server started on https://localhost:${port}`);
