@@ -5,23 +5,45 @@ import fs from "fs";
 
 // food controller file
 
+// const addFood = async (req, res) => {
+//   let image_filename = `${req.file.filename}`;
+
+//   const food = new foodModel({
+//     name: req.body.name,
+//     description: req.body.description,
+//     price: req.body.price,
+//     category: req.body.category,
+//     image: image_filename,
+//   });
+
+//   try {
+//     await food.save();
+//     res.json({ success: true, message: "Food Added" });
+//   } catch (error) {
+//     console.log(error);
+//     res.json({ success: false, message: "Error" });
+//   }
+// };
+
 const addFood = async (req, res) => {
-  let image_filename = `${req.file.filename}`;
-
-  const food = new foodModel({
-    name: req.body.name,
-    description: req.body.description,
-    price: req.body.price,
-    category: req.body.category,
-    image: image_filename,
-  });
-
   try {
+    // ✅ Convert buffer to Base64 string
+    const imageBase64 = req.file ? req.file.buffer.toString("base64") : null;
+
+    const food = new foodModel({
+      name: req.body.name,
+      description: req.body.description,
+      price: req.body.price,
+      category: req.body.category,
+      image: imageBase64, // store Base64 in MongoDB
+    });
+
     await food.save();
+
     res.json({ success: true, message: "Food Added" });
   } catch (error) {
-    console.log(error);
-    res.json({ success: false, message: "Error" });
+    console.error(error);
+    res.json({ success: false, message: "Error adding food" });
   }
 };
 
