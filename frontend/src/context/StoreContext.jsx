@@ -7,7 +7,7 @@ const StoreContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
   const [token, setToken] = useState("");
   const [food_list, setFoodList] = useState([]);
-  const url = "https://food-fleet-4x1p.vercel.app";
+  const url = "https://food-fleet-pearl.vercel.app";
 
   const addToCart = async (itemId) => {
     if (!cartItems[itemId]) {
