@@ -5,41 +5,17 @@ import { StoreContext } from "../../context/StoreContext";
 import axios from "axios";
 
 const Verify = () => {
-  // const [searchParams, setSearchParams] = useSearchParams();
-  // const success = searchParams.get("success");
-  // const orderId = searchParams.get("orderId");
-  // const { url } = useContext(StoreContext);
-  // const navigate = useNavigate();
-
-  // const verifyPayment = async () => {
-  //   const response = await axios.post(url + "/api/order/verify", {
-  //     success,
-  //     orderId,
-  //   });
-  //   if (response.data.success) {
-  //     navigate("/myorders");
-  //   } else {
-  //     navigate("/");
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   verifyPayment();
-  // }, []);
-
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const success = searchParams.get("success");
   const orderId = searchParams.get("orderId");
-  const session_id = searchParams.get("session_id");
   const { url } = useContext(StoreContext);
   const navigate = useNavigate();
 
   const verifyPayment = async () => {
     const response = await axios.post(url + "/api/order/verify", {
+      success,
       orderId,
-      session_id,
     });
-
     if (response.data.success) {
       navigate("/myorders");
     } else {
@@ -48,12 +24,36 @@ const Verify = () => {
   };
 
   useEffect(() => {
-    if (success === "true") {
-      verifyPayment();
-    } else {
-      navigate("/");
-    }
+    verifyPayment();
   }, []);
+
+  // const [searchParams] = useSearchParams();
+  // const success = searchParams.get("success");
+  // const orderId = searchParams.get("orderId");
+  // const session_id = searchParams.get("session_id");
+  // const { url } = useContext(StoreContext);
+  // const navigate = useNavigate();
+
+  // const verifyPayment = async () => {
+  //   const response = await axios.post(url + "/api/order/verify", {
+  //     orderId,
+  //     session_id,
+  //   });
+
+  //   if (response.data.success) {
+  //     navigate("/myorders");
+  //   } else {
+  //     navigate("/");
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   if (success === "true") {
+  //     verifyPayment();
+  //   } else {
+  //     navigate("/");
+  //   }
+  // }, []);
 
   return (
     <div className="verify">
